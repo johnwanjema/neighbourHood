@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
 # Create your views here.
 def welcome(request):
-    return render(request, 'index.html')
+    neighbourhoods = Hood.objects.all()
+    return render(request, 'index.html',{"neighbourhoods":neighbourhoods,})
 
 @login_required(login_url='/accounts/login')
 def profile(request):

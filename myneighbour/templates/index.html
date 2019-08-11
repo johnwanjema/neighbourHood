@@ -1,8 +1,20 @@
 {%extends 'base.html'%}
 {% block content %}
 <div class="container">
+    <h1>neighbourHoods</h1>
     <div class="row">
-        <h1>neighbourHood</h1>
+        {% for neighbourhood in neighbourhoods %}
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" height="400px" src="{{neighbourhood.landing_page.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h2 class=""><strong>{{neighbourhood.name}}</strong>:
+                        {{neighbourhood.location}}</h2>
+           <a href="" style="text-decoration:none;"><button class="btn btn-outline-success center-block"">Join</button></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
