@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import Post, Profile, Hood, Business
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileUpdateForm, NeighbourhoodForm
+from .forms import ProfileUpdateForm, NeighbourhoodForm,NewBusinessForm
 # Create your views here.
 
 
@@ -45,3 +45,21 @@ def addneighbourhood(request):
         else:
             neighbourform = NeighbourhoodForm(request.POST, request.FILES)
     return render(request, 'hood.html', {"neighbourform": neighbourform})
+
+
+@login_required(login_url="/accounts/login/")
+def new_business(request,pk):
+    current_user = request.user
+    neighborhood = get_object_or_404(Hood,pk=pk)
+    if request.method == 'POST':
+        business_form = NewBusinessForm(request.POST, request.FILES)
+        if business_form.is_valid():
+            business = business_form.save(commit=False)
+            business.user = current_user
+            business.neighborhood=neighborhood
+            business.save()
+        return redirect('detail', neighbourhood_id=neighborhood.id)
+
+    else:
+        business_form = NewBusinessForm()
+    return render(request, 'new_business.html', {"form": business_form,'neighborhood':neighborhood})

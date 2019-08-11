@@ -8,6 +8,7 @@ urlpatterns=[
     url(r'^profile/edit$',views.update_profile,name='edit'),
     url('profile/', views.profile, name='profile'),
     url('^newhood',views.addneighbourhood,name="hood"),
+    url(r'^new_business/(?P<pk>\d+)$',views.new_business,name='new_business'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
