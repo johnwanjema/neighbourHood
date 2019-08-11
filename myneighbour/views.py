@@ -1,11 +1,14 @@
-from django.shortcuts import render,redirect
-from .models import Post, Profile,Hood,Business
+from django.shortcuts import render, redirect
+from .models import Post, Profile, Hood, Business
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileUpdateForm
+from .forms import ProfileUpdateForm, NeighbourhoodForm
 # Create your views here.
+
+
 def welcome(request):
     neighbourhoods = Hood.objects.all()
-    return render(request, 'index.html',{"neighbourhoods":neighbourhoods,})
+    return render(request, 'index.html', {"neighbourhoods": neighbourhoods, })
+
 
 @login_required(login_url='/accounts/login')
 def profile(request):
@@ -29,3 +32,16 @@ def update_profile(request):
     else:
         form = ProfileUpdateForm()
     return render(request, 'update_profile.html', {'form': form})
+
+
+@login_required(login_url='/accounts/login/')
+def addneighbourhood(request):
+    neighbourform = NeighbourhoodForm()
+    if request.method == "POST":
+        neighbourform = NeighbourhoodForm(request.POST, request.FILES)
+        if neighbourform.is_valid():
+            neighbourform.save()
+            return redirect('welcome')
+        else:
+            neighbourform = NeighbourhoodForm(request.POST, request.FILES)
+    return render(request, 'hood.html', {"neighbourform": neighbourform})
