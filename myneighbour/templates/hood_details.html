@@ -30,7 +30,7 @@
         </div>
         <div class="col-md-6">
             <br>
-            <h4>Click <a href="{%url 'new_business' pk=neighbourhood.id %}">here</a> to share something with your
+            <h4>Click <a href="{%url 'new_post' pk=neighbourhood.id %}">here</a> to share something with your
                 neighbour.</h4>
             <hr>
             <h3>News from {{ neighbourhood.name }} </h3>
@@ -50,7 +50,7 @@
                     <a href="#!" class="white-text d-flex ">
                         <h5>Posted by : {{post.user.username}}</h5>
                     </a>
-                </div>
+                </div><br>
             </div>
             {%endfor%}
             {%else%}

@@ -15,3 +15,8 @@ class NewBusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields=['name','hood','email']
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ['user']
