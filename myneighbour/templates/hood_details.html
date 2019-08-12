@@ -13,7 +13,6 @@
             {%if businesses%}
             {%for business in businesses%}
             <div class="card">
-
                 <div class="card-body elegant-color white-text rounded-bottom">
                     <h4 class="card-title">{{business.name}}</h4>
                     <hr class="hr-light">
@@ -22,7 +21,7 @@
                         <h5>Email : {{business.email}}</h5>
                     </a>
                 </div>
-            </div>
+            </div><br>
             {%endfor%}
             {%else%}
             <p><b>no business at the moment</b></p>
@@ -50,8 +49,8 @@
                     <a href="#!" class="white-text d-flex ">
                         <h5>Posted by : {{post.user.username}}</h5>
                     </a>
-                </div><br>
-            </div>
+                </div>
+            </div><br>
             {%endfor%}
             {%else%}
             <p><b>no posts at the moment</b></p>
