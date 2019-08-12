@@ -1,1 +1,1 @@
-web: neighbour.wsgi --log-file -
+web: gunicorn neighbour.wsgi --log-file -
