@@ -14,15 +14,21 @@ class Hood(models.Model):
     class Meta:
         ordering = ['name']
 
+    def __str__(self):
+        return self.name
+
 class Business(models.Model):
     name = models.CharField(max_length=150)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    description = models.CharField(max_length=500)
     email = models.EmailField()
 
     class Meta:
         ordering = ['name']
 
+    def __str__(self):
+        return self.name
 
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='profiles/')
@@ -44,15 +50,18 @@ class Profile(models.Model):
 
 
 class Post(models.Model):
+    title = models.CharField(max_length=150)
     image = models.ImageField(upload_to = 'neighbourhood/')
     description = models.CharField(max_length=500)
     neighbourhood = models.ForeignKey('Hood')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile = models.ForeignKey('Profile', null=True)
     
     def save_profile(self):
         self.save()
 
     class Meta:
         ordering = ['description']
+
+    def __str__(self):
+        return self.description
         
