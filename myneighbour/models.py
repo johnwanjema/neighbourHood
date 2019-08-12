@@ -17,6 +17,11 @@ class Hood(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def search_hood(cls, search_term):
+        hood = cls.objects.filter(name__icontains=search_term)
+        return hood
+
 class Business(models.Model):
     name = models.CharField(max_length=150)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

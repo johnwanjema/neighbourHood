@@ -88,3 +88,17 @@ def new_post(request,pk):
     else:
         post_form = PostForm()
     return render(request, 'new_post.html', {"form": post_form,'neighborhood':neighborhood})
+
+
+@login_required(login_url='/accounts/login')
+def search(request):
+    if 'hood' in request.GET and request.GET["hood"]:
+        search_term = request.GET.get("hood")
+        print(search_term)
+        hoods = Hood.search_hood(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message": message, "hoods": hoods,})
+    else:
+        message = "Please enter search term"
+        return render(request, 'search.html', {"message": message, "hoods": hoods})

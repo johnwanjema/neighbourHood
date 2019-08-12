@@ -11,6 +11,7 @@ urlpatterns=[
     url(r'^new_business/(?P<pk>\d+)$',views.new_business,name='new_business'),
     url(r'^hood_details/(?P<neighbourhood_id>\d+)/$' , views.hood_details, name='detail' ),
     url(r'^new_post/(?P<pk>\d+)$',views.new_post,name='new_post'),
+    url(r'^search/', views.search,name='search'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
