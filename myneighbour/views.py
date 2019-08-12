@@ -63,3 +63,10 @@ def new_business(request,pk):
     else:
         business_form = NewBusinessForm()
     return render(request, 'new_business.html', {"form": business_form,'neighborhood':neighborhood})
+
+@login_required(login_url="/accounts/login/")
+def hood_details(request,neighbourhood_id):
+    businesses=Business.objects.filter(hood=neighbourhood_id)
+    posts=Post.objects.filter(neighbourhood=neighbourhood_id)
+    neighbourhood=Hood.objects.get(pk=neighbourhood_id)
+    return render(request,'hood_details.html',{'neighbourhood':neighbourhood,'businesses':businesses,'posts':posts})

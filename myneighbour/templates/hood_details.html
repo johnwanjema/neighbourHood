@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{%block content%}
+{% load bootstrap3 %} {% load staticfiles%}
+<div class="container">
+    <h1 class="card-title"><a>{{ neighbourhood.name }}</a></h1>
+    <div class="row">
+        <div class="col-md-6">
+            <br>
+            <h4>Click <a href="{%url 'new_business' pk=neighbourhood.id %}">here</a> to post about your
+                business</h4>
+            <hr>
+            <h3>Business in {{ neighbourhood.name }} </h3>
+            {%if businesses%}
+            {%for business in businesses%}
+            <div class="card">
+
+                <div class="card-body elegant-color white-text rounded-bottom">
+                    <h4 class="card-title">{{business.name}}</h4>
+                    <hr class="hr-light">
+                    <h1 class="card-text white-text mb-4">{{business.description}}.</h1>
+                    <a href="" class="white-text d-flex ">
+                        <h5>Email : {{business.email}}</h5>
+                    </a>
+                </div>
+            </div>
+            {%endfor%}
+            {%else%}
+            <p><b>no business at the moment</b></p>
+            {%endif%}
+        </div>
+        <div class="col-md-6">
+            <br>
+            <h4>Click <a href="{%url 'new_business' pk=neighbourhood.id %}">here</a> to share something with your
+                neighbour.</h4>
+            <hr>
+            <h3>News from {{ neighbourhood.name }} </h3>
+            {%if posts%}
+            {%for post in posts%}
+            <div class="card">
+                <div class="view overlay">
+                    <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body elegant-color white-text rounded-bottom">
+                    <h4 class="card-title">{{post.title}}</h4>
+                    <hr class="hr-light">
+                    <p class="card-text white-text mb-4">{{post.description}}.</p>
+                    <a href="#!" class="white-text d-flex ">
+                        <h5>Posted by : {{post.user.username}}</h5>
+                    </a>
+                </div>
+            </div>
+            {%endfor%}
+            {%else%}
+            <p><b>no posts at the moment</b></p>
+            {%endif%}
+            <br>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

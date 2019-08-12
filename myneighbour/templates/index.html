@@ -10,11 +10,12 @@
                 <div class="card-body">
                     <h2 class=""><strong>{{neighbourhood.name}}</strong>:
                         {{neighbourhood.location}}</h2>
-           <a href="" style="text-decoration:none;"><button class="btn btn-outline-success center-block"">Join</button></a>
-                </div>
-            </div>
-        </div>
+                    <a href="/hood_details/{{neighbourhood.id}}" style="text-decoration:none;">
+                        <button class="btn btn-success btn-lg">Details</button></a>
+                </div><br>
+            </div><br>
+        </div><br>
         {% endfor %}
-    </div>
+    </div><br>
 </div>
 {% endblock %}
